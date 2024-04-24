@@ -291,8 +291,6 @@ tooltips:
       codecommit_icon: " "
       git_icon: " "
 
-# type: kubectl
-
 secondary_prompt:
   foreground: blue
   template: "  "
