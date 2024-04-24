@@ -114,9 +114,8 @@ blocks:
         trailing_diamond: ""
         background: blue
         foreground: black
-        template: " {{ url (cat .UpstreamIcon (base .UpstreamURL)) .UpstreamURL }} {{ .HEAD }}"
-        # template: ' {{ url (cat .UpstreamIcon (base .UpstreamURL)) .UpstreamURL }}/{{ $dirs := split ".git" .Dir }}{{ $git_worktree := replace "worktrees" "" $dirs._1 | trimAll "/"  }}{{ $git_worktree }} '
-        # {{ $git_main_abs_path := trimAll "/" $dirs._0 }}
+        # template: " {{ url (cat .UpstreamIcon (base .UpstreamURL)) .UpstreamURL }} {{ .HEAD }}"
+        template: " {{ .UpstreamIcon }}{{ url (base .UpstreamURL) .UpstreamURL }} {{ .HEAD }}"
         properties:
           fetch_status: false
           fetch_stash_count: false
@@ -225,24 +224,49 @@ tooltips:
     style: plain
     foreground: darkGray
     # template: "{{ .Segments.Git.Name }}({{ .Segments.Git.Email }})"
-    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ url .Full .URL }}{{ end }} "
     tips:
       - "go"
+    properties:
+      home_enabled: false
+      fetch_version: true
+      display_mode: context
+      # missing_command_text:
+      # version_url_template:
+      cache_version: false
+      parse_mod_file: false
 
   - type: node
     style: plain
     foreground: darkGray
-    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ url .Full .URL }}{{ end }} "
     tips:
       - "node"
       - "nvm"
+    properties:
+      display_mode: context
+      fetch_version: true
+      home_enabled: false
+      cache_version: false
+      fetch_package_manager: false
+      # missing_command_text: "command missing"
+      # version_url_template: "version template"
+      yarn_icon: B
+      npm_icon: 
 
   - type: npm
     style: plain
     foreground: darkGray
-    template: " { if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ url .Full .URL }}{{ end }} "
     tips:
       - "npm"
+    properties:
+      home_enabled: false
+      fetch_version: true
+      display_mode: context
+      # missing_command_text:
+      # version_url_template:
+      cache_version: false
 
   - type: kubectl
     style: plain

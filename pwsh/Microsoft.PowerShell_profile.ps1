@@ -28,6 +28,7 @@ $env:POSH_GIT_ENABLED = $true
 
 ## PowerToys CommandNotFound module
 Import-Module "C:\Program Files\PowerToys\WinGetCommandNotFound.psd1"
+# Import-Module "C:\Program Files\PowerToys\WinUI3Apps\..\WinGetCommandNotFound.psd1"
 
 
 # Completions
