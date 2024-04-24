@@ -262,16 +262,15 @@ tooltips:
       - "{{ if .Working.Changed }} {{ .Working.String }}{{ end }} "
       - "{{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }} "
       - "{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }} "
-      - "{{ .BranchStatus }} "
-      - "{{ if gt .Behind 0 }}{{ .Behind }}{{ end }} "
-      - "{{ if gt .Ahead 0 }}{{ .Ahead }}{{ end }} "
+      - "{{ if gt .Behind 0 }}\uf048 {{ .Behind }}{{ end }} "
+      - "{{ if gt .Ahead 0 }}\uf051 {{ .Ahead }}{{ end }} "
     properties:
       fetch_status: true
       fetch_stash_count: true
-      fetch_worktree_count: true
-      fetch_upstream_icon: true
-      fetch_bare_info: true
-      fetch_user: true
+      fetch_worktree_count: false
+      fetch_upstream_icon: false
+      fetch_bare_info: false
+      fetch_user: false
       branch_max_length: 0
       branch_icon: " "
       branch_identical_icon: "≡ "
