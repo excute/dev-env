@@ -21,13 +21,14 @@ transient_prompt:
 # type: status code
 
 blocks:
-  - type: prompt
+  - type: prompt # First block includes pre-main segments
     newline: true
     alignment: left
     filler: ""
     # overflow: ""
 
     segments:
+      # Status code, execution time before main segments
       - type: status
         alias: Status
         style: plain
@@ -56,8 +57,7 @@ blocks:
           threshold: 500
           style: austin
 
-      # type: status code
-
+      # Main segments start
       - type: os
         style: plain
         foreground: black
@@ -118,11 +118,13 @@ blocks:
         # template: ' {{ url (cat .UpstreamIcon (base .UpstreamURL)) .UpstreamURL }}/{{ $dirs := split ".git" .Dir }}{{ $git_worktree := replace "worktrees" "" $dirs._1 | trimAll "/"  }}{{ $git_worktree }} '
         # {{ $git_main_abs_path := trimAll "/" $dirs._0 }}
         properties:
-          fetch_status: true
-          fetch_stash_count: true
+          fetch_status: false
+          fetch_stash_count: false
           fetch_worktree_count: false
           fetch_upstream_icon: true
           fetch_bare_info: false
+          fetch_user: false
+          branch_max_length: 0
           branch_icon: " "
           branch_identical_icon: "≡ "
           branch_ahead_icon: "↑ "
@@ -141,8 +143,6 @@ blocks:
           azure_devops_icon: " "
           codecommit_icon: " "
           git_icon: " "
-          branch_max_length: 0
-          fetch_user: true
 
       - type: path
         alias: Path
@@ -168,7 +168,7 @@ blocks:
           # folder_format: "<r>%s</r>"
           # gitdir_format: "</r>%s"
 
-  - type: prompt
+  - type: prompt # Second block on right side shows current status
     newline: false
     alignment: right
     filler: "<darkGray,transparent>─</>"
@@ -208,23 +208,83 @@ blocks:
         properties:
           time_format: "15:04:05"
 
-  - type: prompt
+  - type: prompt # Prompt block
     newline: true
     alignment: left
     segments:
       - type: text
         style: plain
-        template: "❯"
+        template: "{{ .Segments.Status.String }}❯</>"
         interactive: false
-        foreground: green
-        foreground_templates:
-          - "{{ if .Code }}red{{ end }}"
+        # foreground: green
+        # foreground_templates:
+        #   - "{{ if .Code }}red{{ end }}"
 
-# tooltips: []
-# type: golang
+tooltips:
+  - type: go
+    style: plain
+    foreground: darkGray
+    # template: "{{ .Segments.Git.Name }}({{ .Segments.Git.Email }})"
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+    tips:
+      - "go"
+
+  - type: node
+    style: plain
+    foreground: darkGray
+    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+    tips:
+      - "node"
+      - "nvm"
+
+  - type: npm
+    style: plain
+    foreground: darkGray
+    template: " { if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} "
+    tips:
+      - "npm"
+
+  - type: kubectl
+    style: plain
+    foreground: darkGray
+    template: "󱃾 {{ .Context }}{{ if .Namespace }} :: {{ .Namespace }}{{ end }} "
+    tips:
+      - "kubectl"
+
+  - type: git
+    tips:
+      - "git"
+    style: plain
+    foreground: darkGray
+    template: "{{ if .Working.Changed }} {{ .Working.String }}{{ end }} {{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }}"
+    properties:
+      fetch_status: true
+      fetch_stash_count: true
+      fetch_worktree_count: true
+      fetch_upstream_icon: true
+      fetch_bare_info: true
+      fetch_user: true
+      branch_max_length: 0
+      branch_icon: " "
+      branch_identical_icon: "≡ "
+      branch_ahead_icon: "↑ "
+      branch_behind_icon: "↓ "
+      branch_gone_icon: "≢ "
+      commit_icon: " "
+      tag_icon: " "
+      rebase_icon: " "
+      cherry_pick_icon: " "
+      revert_icon: " "
+      merge_icon: " "
+      no_commits_icon: " "
+      github_icon: " "
+      gitlab_icon: " "
+      bitbucket_icon: " "
+      azure_devops_icon: " "
+      codecommit_icon: " "
+      git_icon: " "
+
 # type: kubectl
-# type: node
-# type: npm
 
 secondary_prompt:
   foreground: blue
