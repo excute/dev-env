@@ -12,26 +12,32 @@ patch_pwsh_bleed: true
 # var:
 #   ExecutionTime: init
 
-# tooltips: []
-# type: golang
-# type: kubectl
-# type: node
-# type: npm
-
 transient_prompt:
   # filler: ""
   # filler: "─"
   foreground: darkGray
   template: "\n  {{ .Segments.ExecutionTime.FormattedMs }}\n\n<black,lightYellow>  {{ now | date \"15:04:05\" }} </><lightYellow></> "
 
+# type: status code
+
 blocks:
   - type: prompt
     newline: true
     alignment: left
-    filler: "─"
+    filler: ""
     # overflow: ""
 
     segments:
+      - type: status
+        alias: status
+        style: plain
+        foreground: blue
+        template: "{{ .String }}"
+        properties:
+          always_enabled: false
+          # status_template: "|"
+          # status_separator: "|"
+
       - type: executiontime
         alias: ExecutionTime
         style: plain
@@ -42,46 +48,49 @@ blocks:
           threshold: 500
           style: austin
 
+      # type: status code
+
       - type: os
         style: plain
         foreground: black
         background: lightYellow
-        template: " {{ .Icon }} "
+        template: " {{ .Icon }}"
         properties:
-          macos: 
-          linux: 
-          windows: 
           display_distro_name: false
-          alpine: 
-          aosc: 
-          arch: 
-          centos: 
-          coreos: 
-          debian: 
-          devuan: 
-          raspbian: 
-          elementary: 
-          fedora: 
-          gentoo: 
-          mageia: 
-          manjaro: 
-          mint: 
-          nixos: 
-          opensuse: 
-          redhat: 
-          sabayon: 
-          slackware: 
-          ubuntu: 
-          rocky: 
-          alma: 
-          android: 
+          macos: " "
+          linux: " "
+          windows: " "
+          alpine: " "
+          aosc: " "
+          arch: " "
+          centos: " "
+          coreos: " "
+          debian: " "
+          devuan: " "
+          raspbian: " "
+          elementary: " "
+          fedora: " "
+          gentoo: " "
+          mageia: " "
+          manjaro: " "
+          mint: " "
+          nixos: " "
+          opensuse: " "
+          redhat: " "
+          sabayon: " "
+          slackware: " "
+          ubuntu: " "
+          rocky: " "
+          alma: " "
+          android: " "
 
       - type: shell
         style: diamond
-        powerline_symbol: 
+        leading_diamond: ""
+        trailing_diamond: ""
         foreground: black
         background: lightYellow
-        template: '{{ if (eq .Name "pwsh")}} {{ else if (eq .Name "bash") }} {{ else if (eq .Name "zsh") }}󰬡 {{ else }}.Name{{ end }} '
+        template: '{{ if (eq .Name "pwsh")}} {{ else if (eq .Name "bash") }} {{ else if (eq .Name "zsh") }}󰬡 {{ else }}.Name{{ end }}'
 
       - type: session
         style: powerline
@@ -93,7 +102,7 @@ blocks:
       - type: git
         alias: Git
         style: diamond
-        powerline_symbol: ""
+        leading_diamond: ""
         trailing_diamond: ""
         background: blue
         foreground: black
@@ -130,7 +139,7 @@ blocks:
       - type: path
         alias: Path
         style: diamond
-        powerline_symbol: ""
+        leading_diamond: ""
         trailing_diamond: 
         background: blue
         foreground: black
@@ -152,6 +161,46 @@ blocks:
           # gitdir_format: "</r>%s"
 
   - type: prompt
+    newline: false
+    alignment: right
+    filler: "<darkGray,transparent>─</>"
+    segments:
+      - type: upgrade
+        style: diamond
+        leading_diamond: 
+        trailing_diamond: ""
+        foreground: black
+        background: lightGreen
+        template: "  "
+
+      - type: sysinfo
+        style: diamond
+        leading_diamond: ""
+        trailing_diamond: ""
+        background: darkGray
+        foreground: white
+        template: "  {{ round .PhysicalPercentUsed .Precision }}% "
+        properties:
+          precision: 2
+
+      - type: battery
+        style: diamond
+        leading_diamond: ""
+        trailing_diamond: ""
+        background: lightRed
+        foreground: black
+
+      - type: time
+        style: diamond
+        leading_diamond: ""
+        trailing_diamond: ""
+        background: lightYellow
+        foreground: black
+        template: "  {{ .CurrentDate | date .Format }} "
+        properties:
+          time_format: "15:04:05"
+
+  - type: prompt
     newline: true
     alignment: left
     segments:
@@ -163,70 +212,12 @@ blocks:
         foreground_templates:
           - "{{ if .Code }}red{{ end }}"
 
-  # - type: rprompt
-  #   newline: false
-  #   alignment: right
-  #   filter: ""
-  #   overflow: hide
-  #   segments:
-  #     - type: executiontime
-  #       style: plain
-  #       foreground: darkGray
+# tooltips: []
+# type: golang
+# type: kubectl
+# type: node
+# type: npm
 
 secondary_prompt:
   foreground: blue
   template: "  "
-# type: git
-
-# type: execution_time
-# type: status code
-# type: system info
-
-# type: upgrade
-# type: battery
-# type: time
-
-# - type: prompt
-#   newline: false
-#   alignment: left
-#   filter: ""
-#   overflow: hide
-
-#   segments:
-#   - type: path
-#     style: powerline
-#     powerline_symbol: ""
-#     foreground: "#ffffff"
-#     background: "#61AFEF"
-#     properties:
-#       style: folder
-
-# - type: prompt
-#   newline: false
-#   alignment: left
-#   filter: ""
-#   overflow: ""
-#   segments:
-#   - type: ""
-#     style: ""
-#     powerline_symbol: ""
-#     invert_powerline:
-#     leading_diamond: ""
-#     trailing_diamond: ""
-#     foreground: "#fff"
-#     foreground_templates:
-#     - ""
-#     background: ""
-#     background_templates:
-#     - ""
-#     template: ""
-#     templates:
-#     - ""
-#     templates_logic: ""
-#     interactive: false
-#     alias: ""
-#     min_width: 1
-#     max_width: 1
-#     properties:
-#       always_enabled: false
-
