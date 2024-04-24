@@ -16,7 +16,7 @@ transient_prompt:
   # filler: ""
   # filler: "─"
   foreground: darkGray
-  template: "\n  {{ .Segments.ExecutionTime.FormattedMs }}\n\n<black,lightYellow>  {{ now | date \"15:04:05\" }} </><lightYellow></> "
+  template: "\n {{ .Segments.Status.String }}{{ if eq .Code 0 }} {{ else }} {{ reason .Code }}{{end}} </> {{ .Segments.ExecutionTime.FormattedMs }}\n\n<black,lightYellow>  {{ now | date \"15:04:05\" }} </><lightYellow></> "
 
 # type: status code
 
@@ -29,20 +29,28 @@ blocks:
 
     segments:
       - type: status
-        alias: status
+        alias: Status
         style: plain
-        foreground: blue
-        template: "{{ .String }}"
+        # foreground: blue
+        template: " {{ .String }}{{ if eq .Code 0 }} {{ else }} {{ reason .Code }}{{end}} </>"
+        status_separator: " | "
+        # templates_logic: first_match
+        # templates:
+        #   - " {{ if eq .Code 0 }}{{ .String }} {{ end }}</>"
+        #   - " {{ .String }} {{ reason .Code }} </>"
         properties:
-          always_enabled: false
-          # status_template: "|"
-          # status_separator: "|"
+          always_enabled: true
+          status_template: "{{ if eq .Code 0 }}<green>{{ else }}<red>{{ end }}"
+          # status_template: "oh hey"
+        # foreground_templates:
+        #   - "{{ if eq .Code 0 }}green{{ end }}"
+        #   - red
 
       - type: executiontime
         alias: ExecutionTime
         style: plain
-        foreground: blue
-        template: "  {{ .FormattedMs }}\n\n"
+        foreground: darkGray
+        template: " {{ .FormattedMs }}\n\n"
         properties:
           always_enabled: true
           threshold: 500
