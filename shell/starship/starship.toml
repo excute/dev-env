@@ -1,0 +1,283 @@
+# Reference: https://starship.rs/config/
+# Nerd font symbol reference: https://www.nerdfonts.com/cheat-sheet
+
+# Style list
+# format = """
+# [bold ](bold)
+# [italic ](italic)
+# [underline ](underline)
+# [dimmed ](dimmed)
+# [inverted ](inverted)
+# [blink ](blink)
+# [hidden ](hidden)
+# [strikethrough ](strikethrough)
+# """
+
+
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+
+# Symbols
+# nf-pl-(left/right)_hard_divider: , 
+
+
+# Tokyo night color levels
+# 1: (fg:#090c0c bg:#a3aed2)
+# 2: (fg:#e3e5e5 bg:#769ff0)
+# 3: (fg:#769ff0 bg:#394260)
+# 4: (fg:#769ff0 bg:#212736) 
+# 5: (fg:#a0a9cb bg:#1d2230)
+
+
+format = """
+\n\
+[ $os ](bg:bright-yellow fg:black)\
+[](bg:bright-black fg:bright-yellow)\
+
+[ $hostname $shell $username $sudo](fg:white bg:bright-black)\
+[](fg:bright-black bg:blue)\
+
+[( ${custom.git_origin})( $git_commit)( $git_branch) $directory](fg:black bg:blue)\
+[](fg:blue)\
+
+$fill\
+
+[](fg:bright-yellow)\
+[( $nodejs)( $rust)( $golang)( $php) ](fg:black bg:bright-yellow)\
+
+\n$character\n"""
+
+
+right_format = """
+[($status )($git_state )($git_metrics )($git_status )](fg:foreground)\
+[ $memory_usage $battery $time](fg:foreground)\
+"""
+
+
+# Continuation prompt
+continuation_prompt = '▶▶ '
+
+# Fill space
+[fill]
+symbol = ""
+style = "bold black"
+disabled = false
+
+
+# OS
+[os]
+format = "$symbol"
+disabled = false
+
+[os.symbols]
+Windows = " "
+Ubuntu = " "
+Raspbian = " "
+
+
+# shell
+[shell]
+disabled = false
+powershell_indicator = " pwsh"
+zsh_indicator = " zsh"
+bash_indicator = " bash"
+format = "$indicator"
+
+
+# sudo 
+[sudo]
+disabled = false
+symbol = " "
+format = "$symbol"
+
+
+# Username
+[username]
+disabled = false
+show_always = true
+format = " $user"
+
+
+# hostname
+[hostname]
+disabled = false
+ssh_only = false
+ssh_symbol = "󰢩 "
+trim_at = ""
+format = "$hostname$ssh_symbol"
+#  
+
+
+# Ref: https://github.com/starship/starship/discussions/1252#discussioncomment-1165482
+[custom.git_origin]
+when = true
+require_repo = true
+command = """
+GIT_REMOTE=$(command git ls-remote --get-url 2> /dev/null)
+if [[ "$GIT_REMOTE" =~ "github" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "gitlab" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "bitbucket" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+elif [[ "$GIT_REMOTE" =~ "git" ]]; then
+    GIT_REMOTE_SYMBOL=" "
+else
+    GIT_REMOTE_SYMBOL=" "
+fi
+GIT_ORIGIN=$(command basename $GIT_REMOTE 2> /dev/null)
+echo "$GIT_REMOTE_SYMBOL${GIT_ORIGIN%%.*}"
+"""
+format = "$output"
+
+
+# Ref: https://github.com/starship/starship/discussions/1252#discussioncomment-1466449
+[custom.git_origin_pwsh]
+
+
+# Directory
+[directory]
+disabled = false
+truncation_length = 3
+truncate_to_repo = true
+read_only = " "
+read_only_style = "fg: red"
+truncation_symbol = "…/"
+# fish_style_pwd_dir_length = 4
+format = "$path[( $read_only)]($read_only_style)"
+before_repo_root_style = ""
+repo_root_style = ""
+repo_root_format = "$path"
+#  
+
+# [directory.substitutions]
+# "Documents" = "󰈙 "
+# "Downloads" = " "
+# "Music" = " "
+# "Pictures" = " "
+
+
+# Git
+[git_commit]
+disabled = false
+tag_disabled = false
+tag_symbol = " "
+format = " $hash$tag"
+
+[git_branch]
+disabled = false
+always_show_remote = false
+symbol = " "
+format = "$symbol$branch(:$remote_branch)"
+
+[git_status]
+disabled = false
+conflicted = "= $count"
+ahead = " $count"
+behind = " $count"
+diverged = "$behind_count 󰞗 󰞘 $ahead_count"
+up_to_date = " "
+untracked = "? $count"
+stashed = " $count"
+modified = " $count"
+staged = " $count"
+renamed = "» $count"
+deleted = " $count"
+typechanged = " $count"
+# format = "\\[$all_status\\]\\[$ahead_behind\\]"
+format = "$all_status $ahead_behind"
+
+[git_metrics]
+disabled = false
+format = "(+$added)( -$deleted)"
+
+[git_state]
+disabled = false
+format = "\\([$state( $progress_current/$progress_total)]($style)\\) "
+
+
+# Program specific
+[nodejs]
+symbol = " "
+# style = "bg:#212736"
+# format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+format = "$symbol( $version)"
+
+[rust]
+symbol = " "
+# style = "bg:#212736"
+# format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+format = "$symbol( $version)"
+
+[golang]
+# symbol = " "
+symbol = " "
+# style = "bg:#212736"
+# format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+format = "$symbol( $version)(:$mod_version)"
+
+[php]
+symbol = " "
+# style = "bg:#212736"
+# format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+format = "$symbol( $version)"
+
+
+# status
+[status]
+disabled = false
+symbol = " "
+# success_symbol = " "
+not_executable_symbol = " "
+not_found_symbol = " "
+sigint_symbol = " "
+signal_symbol = " "
+format = "$symbol$common_meaning$signal_name"
+
+
+# memory
+[memory_usage]
+disabled = false
+threshold = 0
+symbol = " "
+format = "$symbol$ram_pct"
+
+
+# Time
+[time]
+disabled = false
+use_12hr = false
+time_format = "%T" # Hour:Minute Format
+format = ' $time'
+
+
+# Battery
+[battery]
+disabled = false
+full_symbol = " "
+charging_symbol = "󱐋 "
+discharging_symbol = ""
+unknown_symbol = " "
+empty_symbol = " "
+format = "$symbol"
+
+[[battery.display]]
+threshold = 100
+charging_symbol = "󱐋  "
+discharging_symbol = " "
+
+[[battery.display]]
+threshold = 75
+charging_symbol = "󱐋  "
+discharging_symbol = " "
+
+[[battery.display]]
+threshold = 50
+charging_symbol = "󱐋  "
+discharging_symbol = " "
+
+[[battery.display]]
+threshold = 25
+charging_symbol = "󱐋  "
+discharging_symbol = "  $percent"
