@@ -16,7 +16,7 @@ transient_prompt:
   # filler: ""
   # filler: "─"
   foreground: darkGray
-  template: "\n {{ .Segments.Status.String }}{{ if eq .Code 0 }} {{ else }} {{ reason .Code }}{{end}} </> {{ .Segments.ExecutionTime.FormattedMs }}\n\n<black,lightYellow>  {{ now | date \"15:04:05\" }} </><lightYellow></> "
+  template: "\n {{ .Segments.Status.String }}{{ if eq .Code 0 }} {{ else }} {{ reason .Code }} ({{ hresult .Code }}){{end}} </> {{ .Segments.ExecutionTime.FormattedMs }}\n\n<black,lightYellow>  {{ now | date \"15:04:05\" }} </><lightYellow></> "
 
 # type: status code
 
@@ -33,7 +33,7 @@ blocks:
         alias: Status
         style: plain
         # foreground: blue
-        template: " {{ .String }}{{ if eq .Code 0 }} {{ else }} {{ reason .Code }}{{end}} </>"
+        template: " {{ .String }}{{ if eq .Code 0 }} {{ else }} {{ reason .Code }} ({{ hresult .Code }}){{end}} </>"
         status_separator: " | "
         # templates_logic: first_match
         # templates:
