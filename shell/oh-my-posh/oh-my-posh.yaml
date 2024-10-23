@@ -98,14 +98,14 @@ blocks:
         trailing_diamond: ""
         foreground: black
         background: lightYellow
-        template: '{{ if (eq .Name "pwsh")}} {{ else if (eq .Name "bash") }} {{ else if (eq .Name "zsh") }}󰬡 {{ else }}.Name{{ end }}'
+        template: '{{ if (eq .Name "pwsh")}} {{ else if (eq .Name "bash") }} {{ else if (eq .Name "zsh") }}󰬡 {{ else if (eq .Name "fish") }} {{ else }}{{ .Name }}{{ end }}'
 
       - type: session
         style: powerline
         powerline_symbol: 
         foreground: white
         background: darkGray
-        template: "{{ if .SSHSession }} \U000F06F3 {{ end }}  {{ .HostName }}  {{ .UserName }}{{ if .Root }} {{ end }} "
+        template: "{{ if .SSHSession }} \U000F06F3 {{ end }} 󰍹 {{ .HostName }}  {{ .UserName }}{{ if .Root }} {{ end }} "
 
       - type: git
         alias: Git
@@ -186,7 +186,7 @@ blocks:
         trailing_diamond: ""
         background: darkGray
         foreground: white
-        template: "  {{ round .PhysicalPercentUsed .Precision }}% "
+        template: "   {{ round .PhysicalPercentUsed .Precision }}% "
         properties:
           precision: 2
 
@@ -224,7 +224,7 @@ tooltips:
     style: plain
     foreground: darkGray
     # template: "{{ .Segments.Git.Name }}({{ .Segments.Git.Email }})"
-    template: " {{ if .Error }}{{ .Error }}{{ else }}{{ url .Full .URL }}{{ end }} "
+    template: " {{ if .Error }} {{ .Error }}{{ else }}{{ url .Full .URL }}{{ end }} "
     tips:
       - "go"
     properties:
