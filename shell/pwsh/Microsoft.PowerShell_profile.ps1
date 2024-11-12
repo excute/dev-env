@@ -1,7 +1,6 @@
 # Prompt
 ## oh-my-posh
-oh-my-posh init pwsh --config "$env:OneDrive/Documents/PowerShell/config.yaml" | Invoke-Expression
-# oh-my-posh init pwsh --config "$env:OneDrive/Documents/PowerShell/config.json" | Invoke-Expression
+oh-my-posh init pwsh --config "$env:OneDrive/Documents/PowerShell/oh-my-posh.yaml" | Invoke-Expression
 
 ## posh-git
 Import-Module posh-git
@@ -27,8 +26,11 @@ $env:POSH_GIT_ENABLED = $true
 # }
 
 ## PowerToys CommandNotFound module
-Import-Module "C:\Program Files\PowerToys\WinGetCommandNotFound.psd1"
-# Import-Module "C:\Program Files\PowerToys\WinUI3Apps\..\WinGetCommandNotFound.psd1"
+Import-Module -Name Microsoft.WinGet.CommandNotFound
+#f45873b3-b655-43a6-b217-97c00aa0db58
+
+## Linux X11 Forwarding
+$env:DISPLAY=":0"
 
 
 # Completions

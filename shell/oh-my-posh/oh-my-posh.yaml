@@ -95,17 +95,18 @@ blocks:
       - type: shell
         style: diamond
         leading_diamond: ""
-        trailing_diamond: ""
+        trailing_diamond: ""
         foreground: black
         background: lightYellow
         template: '{{ if (eq .Name "pwsh")}} {{ else if (eq .Name "bash") }} {{ else if (eq .Name "zsh") }}󰬡 {{ else if (eq .Name "fish") }} {{ else }}{{ .Name }}{{ end }}'
 
       - type: session
-        style: powerline
-        powerline_symbol: 
+        style: diamond
+        leading_diamond: ""
+        trailing_diamond: ""
         foreground: white
         background: darkGray
-        template: "{{ if .SSHSession }} \U000F06F3 {{ end }} 󰍹 {{ .HostName }}  {{ .UserName }}{{ if .Root }} {{ end }} "
+        template: "{{ if .SSHSession }} \U000F06F3 {{ end }}  {{ .HostName }}  {{ .UserName }}{{ if .Root }}  {{ end }} "
 
       - type: git
         alias: Git
@@ -172,13 +173,13 @@ blocks:
     alignment: right
     filler: "<darkGray,transparent>─</>"
     segments:
-      - type: upgrade
-        style: diamond
-        leading_diamond: 
-        trailing_diamond: ""
-        foreground: black
-        background: lightGreen
-        template: "  "
+      # - type: upgrade
+      #   style: diamond
+      #   leading_diamond: 
+      #   trailing_diamond: ""
+      #   foreground: black
+      #   background: lightGreen
+      #   template: "  "
 
       - type: sysinfo
         style: diamond
