@@ -289,7 +289,6 @@ tooltips:
       - "{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}"
       - "{{ if gt .Behind 0 }}\uf048 {{ .Behind }}{{ end }}"
       - "{{ if gt .Ahead 0 }}\uf051 {{ .Ahead }}{{ end }}"
-      # - "{{ if }}"
     properties:
       fetch_status: true
       fetch_stash_count: true
