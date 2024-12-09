@@ -281,7 +281,7 @@ tooltips:
       - "git"
     style: plain
     foreground: darkGray
-    template: "{{ if .Templates }}{{.Templates}}{{ else }}≡ {{ end }} "
+    template: ≡
     templates_logic: join
     templates:
       - "{{ if .Working.Changed }} {{ .Working.String }}{{ end }}"
