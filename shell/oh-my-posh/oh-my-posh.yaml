@@ -153,7 +153,7 @@ blocks:
         foreground: black
         template: ' {{ if .Segments.Contains "Git" }}/{{ splitList (splitList "/" (replace "\\" "/" .Segments.Git.Dir) | last ) .Path | last | trimPrefix "/" }}{{ else }}{{ .Path }}{{end}} '
         properties:
-          style: unique
+          style: full
           folder_separator_icon: /
           # folder_separator_template:
           home_icon: "~"
@@ -284,6 +284,7 @@ tooltips:
     template: ≡
     templates_logic: join
     templates:
+      - "{{ .Dir }}"
       - "{{ if .Working.Changed }} {{ .Working.String }}{{ end }}"
       - "{{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }}"
       - "{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}"
