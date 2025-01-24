@@ -106,7 +106,7 @@ blocks:
         trailing_diamond: ""
         foreground: white
         background: darkGray
-        template: "{{ if .SSHSession }} \U000F06F3 {{ end }}  {{ .HostName }}  {{ .UserName }}{{ if .Root }}  {{ end }} "
+        template: "{{ if .SSHSession }} 󰢩 {{ end }}  {{ .HostName }}  {{ .UserName }}{{ if .Root }}  {{ end }} "
 
       - type: git
         alias: Git
