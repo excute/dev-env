@@ -19,7 +19,7 @@ echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 # CRI-O
 
 curl -fsSL https://pkgs.k8s.io/addons:/cri-o:/stable:/$CRIO_VERSION/deb/Release.key |
-    gpg --dearmor -o /etc/apt/keyrings/cri-o-apt-keyring.gpg
+    sudo gpg --dearmor -o /etc/apt/keyrings/cri-o-apt-keyring.gpg
 
 echo "deb [signed-by=/etc/apt/keyrings/cri-o-apt-keyring.gpg] https://pkgs.k8s.io/addons:/cri-o:/stable:/$CRIO_VERSION/deb/ /" |
-    tee /etc/apt/sources.list.d/cri-o.list
+    sudo tee /etc/apt/sources.list.d/cri-o.list
