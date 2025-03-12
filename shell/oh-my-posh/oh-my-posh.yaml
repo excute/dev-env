@@ -16,7 +16,7 @@ transient_prompt:
   # filler: ""
   # filler: "─"
   foreground: darkGray
-  template: "\n {{ .Segments.Status.String }}{{ if eq .Code 0 }} {{ else }} {{ reason .Code }} ({{ hresult .Code }}){{end}} </> {{ .Segments.ExecutionTime.FormattedMs }}\n\n<black,lightYellow>  {{ now | date \"15:04:05\" }} </><lightYellow></> "
+  template: "\n {{ .Segments.Status.String }}  {{ .Segments.ExecutionTime.FormattedMs }}\n\n<black,lightYellow>  {{ now | date \"15:04:05\" }} </><lightYellow></> "
 
 # type: status code
 
@@ -32,16 +32,17 @@ blocks:
       - type: status
         alias: Status
         style: plain
-        # foreground: blue
-        template: " {{ .String }}{{ if eq .Code 0 }} {{ else }} {{ reason .Code }} ({{ hresult .Code }}){{end}} </>"
-        status_separator: " | "
+        foreground: darkGray
+        template: " {{ .String }}"
         # templates_logic: first_match
         # templates:
         #   - " {{ if eq .Code 0 }}{{ .String }} {{ end }}</>"
         #   - " {{ .String }} {{ reason .Code }} </>"
         properties:
           always_enabled: true
-          status_template: "{{ if eq .Code 0 }}<green>{{ else }}<red>{{ end }}"
+          status_template: "{{ if .Error }}<red> {{ hresult .Code }}{{ else }}<green> {{ end }}</>"
+          # status_separator: "\uf0020|\uf0020"
+          status_separator: " | "
           # status_template: "oh hey"
         # foreground_templates:
         #   - "{{ if eq .Code 0 }}green{{ end }}"
@@ -51,7 +52,7 @@ blocks:
         alias: ExecutionTime
         style: plain
         foreground: darkGray
-        template: " {{ .FormattedMs }}\n\n"
+        template: "  {{ .FormattedMs }}\n\n"
         properties:
           always_enabled: true
           threshold: 500
@@ -214,7 +215,7 @@ blocks:
     segments:
       - type: text
         style: plain
-        template: "{{ .Segments.Status.String }}❯</>"
+        template: "{{ if eq .Segments.Status.Code 0 }}<green>{{ else }}<red>{{ end }}❯</>"
         interactive: false
         # foreground: green
         # foreground_templates:
