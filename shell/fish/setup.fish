@@ -1,7 +1,6 @@
 #!/home/linuxbrew/.linuxbrew/bin/fish
 #!/usr/bin/env fish
 
-
 # fish configs
 ## delete
 if test -e $HOME/.config/fish/conf.d; or test -L $HOME/.config/fish/conf.d
@@ -11,11 +10,9 @@ end
 ## link
 ln -s $(pwd)/conf.d $HOME/.config/fish/conf.d
 
-
 # starship
 ## fetch
 # curl -sS https://starship.rs/install.sh | sh
-
 
 ## delete existing config
 # if test -e $HOME/.config/starship.toml; or test -L $HOME/.config/starship.toml
@@ -25,7 +22,6 @@ ln -s $(pwd)/conf.d $HOME/.config/fish/conf.d
 ## link configs
 # ln -s $(pwd)/../starship/starship.toml $HOME/.config/starship.toml
 # export STARSHIP_CONFIG=$(pwd)/../starship/starship.toml
-
 
 # oh my posh
 ## install
@@ -41,3 +37,12 @@ end
 
 ## copy configs
 cp $(pwd)/../oh-my-posh/oh-my-posh.yaml $HOME/.config/oh-my-posh.yaml
+
+# git
+## delete existing config
+if test -e $HOME/.gitconfig; or test -L $HOME/.gitconfig
+    rm -rf $HOME/.gitconfig
+end
+
+## link configs
+ln -s $(pwd)/../../git/.gitconfig $HOME/.gitconfig
