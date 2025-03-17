@@ -1,3 +1,5 @@
 [user]
 	email = oys1751@gmail.com
 	name = Excute
+[log]
+	date = iso-strict
