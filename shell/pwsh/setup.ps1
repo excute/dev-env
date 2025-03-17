@@ -16,4 +16,5 @@ Copy-Item "../oh-my-posh/oh-my-posh.yaml" -Destination "$env:OneDrive/Documents/
 if (Test-Path "$env:USERPROFILE/.gitconfig") {
 	Remove-Item "$env:USERPROFILE/.gitconfig"
 }
-New-Item -Path "$env:USERPROFILE/.gitconfig" -ItemType HardLink -Value "../../git/.gitconfig"
+# New-Item -Path "$env:USERPROFILE/.gitconfig" -ItemType HardLink -Value "../../git/.gitconfig"
+Copy-Item "../../git/.gitconfig" -Destination "$env:USERPROFILE/.gitconfig"
