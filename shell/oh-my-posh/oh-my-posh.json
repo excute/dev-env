@@ -1,0 +1,326 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "final_space": true,
+  "shell_integration": true,
+  "patch_pwsh_bleed": true,
+  "version": 3,
+  "transient_prompt": {
+    "foreground": "darkGray",
+    "template": "\n {{ .Segments.Status.String }}  {{ .Segments.ExecutionTime.FormattedMs }}\n\n<black,lightYellow>  {{ now | date \"15:04:05\" }} </><lightYellow></> "
+  },
+  "blocks": [
+    {
+      "type": "prompt",
+      "newline": true,
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "status",
+          "alias": "Status",
+          "style": "plain",
+          "foreground": "darkGray",
+          "template": " {{ .String }}",
+          "properties": {
+            "always_enabled": true,
+            "status_template": "{{ if .Error }}<red> {{ hresult .Code }}{{ else }}<green> {{ end }}</>",
+            "status_separator": " | "
+          }
+        },
+        {
+          "type": "executiontime",
+          "alias": "ExecutionTime",
+          "style": "plain",
+          "foreground": "darkGray",
+          "template": "  {{ .FormattedMs }}\n\n",
+          "properties": {
+            "always_enabled": true,
+            "threshold": 500,
+            "style": "austin"
+          }
+        },
+        {
+          "type": "os",
+          "style": "plain",
+          "foreground": "black",
+          "background": "lightYellow",
+          "template": " {{ .Icon }}",
+          "properties": {
+            "display_distro_name": false,
+            "macos": " ",
+            "linux": " ",
+            "windows": " ",
+            "alpine": " ",
+            "aosc": " ",
+            "arch": " ",
+            "centos": " ",
+            "coreos": " ",
+            "debian": " ",
+            "devuan": " ",
+            "raspbian": " ",
+            "elementary": " ",
+            "fedora": " ",
+            "gentoo": " ",
+            "mageia": " ",
+            "manjaro": " ",
+            "mint": " ",
+            "nixos": " ",
+            "opensuse": " ",
+            "redhat": " ",
+            "sabayon": " ",
+            "slackware": " ",
+            "ubuntu": " ",
+            "rocky": " ",
+            "alma": " ",
+            "android": " "
+          }
+        },
+        {
+          "type": "shell",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "black",
+          "background": "lightYellow",
+          "template": "{{ .Name }}",
+          "properties": {
+            "mapped_shell_names": {
+              "pwsh": " ",
+              "bash": " ",
+              "zsh": "󰬡 ",
+              "fish": " "
+            }
+          }
+        },
+        {
+          "type": "session",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "white",
+          "background": "darkGray",
+          "template": "{{ if .SSHSession }} 󰢩 {{ end }}  {{ .HostName }}  {{ .UserName }}{{ if .Root }}  {{ end }} "
+        },
+        {
+          "type": "git",
+          "alias": "Git",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "background": "blue",
+          "foreground": "black",
+          "template": " {{ .UpstreamIcon }}{{ url (base .UpstreamURL) .UpstreamURL }} {{ .HEAD }}",
+          "properties": {
+            "fetch_status": false,
+            "fetch_stash_count": false,
+            "fetch_worktree_count": false,
+            "fetch_upstream_icon": true,
+            "fetch_bare_info": false,
+            "fetch_user": false,
+            "branch_max_length": 0,
+            "branch_icon": " ",
+            "branch_identical_icon": "≡ ",
+            "branch_ahead_icon": "↑ ",
+            "branch_behind_icon": "↓ ",
+            "branch_gone_icon": "≢ ",
+            "commit_icon": " ",
+            "tag_icon": " ",
+            "rebase_icon": " ",
+            "cherry_pick_icon": " ",
+            "revert_icon": " ",
+            "merge_icon": " ",
+            "no_commits_icon": " ",
+            "github_icon": " ",
+            "gitlab_icon": " ",
+            "bitbucket_icon": " ",
+            "azure_devops_icon": " ",
+            "codecommit_icon": " ",
+            "git_icon": " "
+          }
+        },
+        {
+          "type": "path",
+          "alias": "Path",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "background": "blue",
+          "foreground": "black",
+          "template": " {{ replaceP \".*!omp-gitdir:.*!\\\\/?(.*)\" .Path \"/$1\" }} ",
+          "properties": {
+            "style": "powerlevel",
+            "folder_separator_icon": "/",
+            "home_icon": "~",
+            "folder_icon": " ",
+            "windows_registry_icon": " ",
+            "max_width": 50,
+            "mapped_locations_enabled": true,
+            "hide_root_location": false,
+            "cycle_folder_separator": false,
+            "gitdir_format": "!omp-gitdir:%s!"
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "newline": false,
+      "alignment": "right",
+      "filler": "<darkGray,transparent>─</>",
+      "segments": [
+        {
+          "type": "sysinfo",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "background": "darkGray",
+          "foreground": "white",
+          "template": "   {{ round .PhysicalPercentUsed .Precision }}% ",
+          "properties": {
+            "precision": 2
+          }
+        },
+        {
+          "type": "battery",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "background": "lightRed",
+          "foreground": "black"
+        },
+        {
+          "type": "time",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "background": "lightYellow",
+          "foreground": "black",
+          "template": "  {{ .CurrentDate | date .Format }} ",
+          "properties": {
+            "time_format": "15:04:05"
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "newline": true,
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "template": "{{ if eq .Segments.Status.Code 0 }}<green>{{ else }}<red>{{ end }}❯</>",
+          "interactive": false
+        }
+      ]
+    }
+  ],
+  "tooltips": [
+    {
+      "type": "go",
+      "style": "plain",
+      "foreground": "darkGray",
+      "template": " {{ if .Error }} {{ .Error }}{{ else }}{{ url .Full .URL }}{{ end }} ",
+      "tips": [
+        "go"
+      ],
+      "properties": {
+        "home_enabled": false,
+        "fetch_version": true,
+        "display_mode": "context",
+        "cache_version": false,
+        "parse_mod_file": false
+      }
+    },
+    {
+      "type": "node",
+      "style": "plain",
+      "foreground": "darkGray",
+      "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ url .Full .URL }}{{ end }} ",
+      "tips": [
+        "node",
+        "nvm"
+      ],
+      "properties": {
+        "display_mode": "context",
+        "fetch_version": true,
+        "home_enabled": false,
+        "cache_version": false,
+        "fetch_package_manager": false,
+        "yarn_icon": "B",
+        "npm_icon": " "
+      }
+    },
+    {
+      "type": "npm",
+      "style": "plain",
+      "foreground": "darkGray",
+      "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ url .Full .URL }}{{ end }} ",
+      "tips": [
+        "npm"
+      ],
+      "properties": {
+        "home_enabled": false,
+        "fetch_version": true,
+        "display_mode": "context",
+        "cache_version": false
+      }
+    },
+    {
+      "type": "kubectl",
+      "style": "plain",
+      "foreground": "darkGray",
+      "template": "󱃾 {{ .Context }}{{ if .Namespace }} :: {{ .Namespace }}{{ end }} ",
+      "tips": [
+        "kubectl"
+      ]
+    },
+    {
+      "type": "git",
+      "tips": [
+        "git"
+      ],
+      "foreground": "darkGray",
+      "template": "≡",
+      "templates_logic": "join",
+      "foreground_templates": [
+        "{{ if .Working.Changed }} {{ .Working.String }}{{ end }}",
+        "{{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }}",
+        "{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}",
+        "{{ if gt .Behind 0 }}\uf048 {{ .Behind }}{{ end }}",
+        "{{ if gt .Ahead 0 }}\uf051 {{ .Ahead }}{{ end }}"
+      ],
+      "properties": {
+        "fetch_status": true,
+        "fetch_stash_count": true,
+        "fetch_worktree_count": false,
+        "fetch_upstream_icon": false,
+        "fetch_bare_info": false,
+        "fetch_user": false,
+        "branch_max_length": 0,
+        "branch_icon": " ",
+        "branch_identical_icon": "≡ ",
+        "branch_ahead_icon": "↑ ",
+        "branch_behind_icon": "↓ ",
+        "branch_gone_icon": "≢ ",
+        "commit_icon": " ",
+        "tag_icon": " ",
+        "rebase_icon": " ",
+        "cherry_pick_icon": " ",
+        "revert_icon": " ",
+        "merge_icon": " ",
+        "no_commits_icon": " ",
+        "github_icon": " ",
+        "gitlab_icon": " ",
+        "bitbucket_icon": " ",
+        "azure_devops_icon": " ",
+        "codecommit_icon": " ",
+        "git_icon": " "
+      }
+    }
+  ],
+  "secondary_prompt": {
+    "foreground": "blue",
+    "template": "  "
+  }
+}

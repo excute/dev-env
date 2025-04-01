@@ -28,15 +28,15 @@ ln -s $(pwd)/conf.d $HOME/.config/fish/conf.d
 brew install jandedobbeleer/oh-my-posh/oh-my-posh
 
 ## delete existing config
-if test -e $HOME/.config/oh-my-posh.yaml; or test -L $HOME/.config/oh-my-posh.yaml
-    rm -rf $HOME/.config/oh-my-posh.yaml
+if test -e $HOME/.config/oh-my-posh.json; or test -L $HOME/.config/oh-my-posh.json
+    rm -rf $HOME/.config/oh-my-posh.json
 end
 
 ## link configs
-# ln -s $(pwd)/../oh-my-posh/oh-my-posh.yaml $HOME/.config/oh-my-posh.yaml
+# ln -s $(pwd)/../oh-my-posh/oh-my-posh.json $HOME/.config/oh-my-posh.json
 
 ## copy configs
-cp $(pwd)/../oh-my-posh/oh-my-posh.yaml $HOME/.config/oh-my-posh.yaml
+cp $(pwd)/../oh-my-posh/oh-my-posh.json $HOME/.config/oh-my-posh.json
 
 # git
 ## delete existing config

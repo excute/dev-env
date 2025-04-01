@@ -1,0 +1,44 @@
+"$schema" = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json"
+final_space = true
+version = 3
+shell_integration = true
+patch_pwsh_bleed = true
+
+[transient_prompt]
+background = "transparent"
+foreground = "darkGray"
+template = "\n {{ .Segments.Status.String }}  {{ .Segments.ExecutionTime.FormattedMs }}\n\n<black,lightYellow>  {{ now | date \"15:04:05\" }} </><lightYellow></> "
+
+
+[[blocks]]
+type = "prompt"
+newline = true
+alignment = "left"
+filter = ""
+
+# [[blocks.segments]]
+# type = "path"
+# style = "powerline"
+# powerline_symbol = ""
+# foreground = "#ffffff"
+# background = "#61AFEF"
+# [blocks.segments.properties]
+# style = "folder"
+
+[[blocks.segments]]
+type = "status"
+alias = "Status"
+style = "plain"
+foreground = "darkGray"
+template = " {{ .String }}"
+[blocks.segments.properties]
+always_enabled = true
+status_template = "{{ if .Error }}<red> {{ hresult .Code }}{{ else }}<green> {{ end }}</>"
+status_separator = " | "
+
+[[blocks.segments]]
+type = "executiontime"
+alias = "ExcutionTime"
+style = "plain"
+foreground = "darkGray"
+template = "  {{ .FormattedMs }}\n\n"
