@@ -147,7 +147,7 @@
           "foreground": "black",
           "template": " {{ path .Path .Location }} ",
           "properties": {
-            "style": "full",
+            "style": "unique",
             "folder_separator_icon": "/",
             "home_icon": "~",
             "folder_icon": " ",
