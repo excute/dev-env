@@ -145,9 +145,9 @@
           "trailing_diamond": "",
           "background": "blue",
           "foreground": "black",
-          "template": " {{ replaceP \".*!omp-gitdir:.*!\\\\/?(.*)\" .Path \"/$1\" }} ",
+          "template": " {{ path .Path .Location }} ",
           "properties": {
-            "style": "powerlevel",
+            "style": "full",
             "folder_separator_icon": "/",
             "home_icon": "~",
             "folder_icon": " ",
@@ -156,7 +156,7 @@
             "mapped_locations_enabled": true,
             "hide_root_location": false,
             "cycle_folder_separator": false,
-            "gitdir_format": "!omp-gitdir:%s!"
+            "gitdir_format": "<i>%s</i>"
           }
         }
       ]
