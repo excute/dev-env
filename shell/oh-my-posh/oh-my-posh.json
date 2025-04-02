@@ -283,7 +283,7 @@
       "foreground": "darkGray",
       "template": "≡",
       "templates_logic": "join",
-      "foreground_templates": [
+      "templates": [
         "{{ if .Working.Changed }} {{ .Working.String }}{{ end }}",
         "{{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }}",
         "{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}",
