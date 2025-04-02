@@ -1,6 +1,6 @@
 # Prompt
 ## oh-my-posh
-oh-my-posh init pwsh --config "$env:OneDrive/Documents/PowerShell/oh-my-posh.yaml" | Invoke-Expression
+oh-my-posh init pwsh --config "$env:OneDrive/Documents/PowerShell/oh-my-posh.json" | Invoke-Expression
 
 ## posh-git
 Import-Module posh-git
@@ -30,7 +30,7 @@ Import-Module -Name Microsoft.WinGet.CommandNotFound
 #f45873b3-b655-43a6-b217-97c00aa0db58
 
 ## Linux X11 Forwarding
-$env:DISPLAY=":0"
+$env:DISPLAY = ":0"
 
 
 # Completions
@@ -49,4 +49,4 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 }
 
 ## oh-my-posh
-oh-my-posh completion powershell | Out-String | Invoke-Expression
+# oh-my-posh completion powershell | Out-String | Invoke-Expression
