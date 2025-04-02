@@ -199,7 +199,7 @@
           "style": "diamond",
           "leading_diamond": "",
           "trailing_diamond": "",
-          "background": "red",
+          "background": "green",
           "foreground": "black",
           "template": " {{ .UpstreamIcon }}{{ url (base .UpstreamURL) .UpstreamURL }} {{ .HEAD }} ",
           "properties": {
