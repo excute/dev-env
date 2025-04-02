@@ -37,7 +37,14 @@
             "threshold": 500,
             "style": "austin"
           }
-        },
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "newline": true,
+      "alignment": "left",
+      "segments": [
         {
           "type": "os",
           "style": "plain",
