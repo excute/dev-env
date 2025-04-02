@@ -105,10 +105,10 @@
           "alias": "Git",
           "style": "diamond",
           "leading_diamond": "",
-          "trailing_diamond": "",
-          "background": "blue",
+          "trailing_diamond": "",
+          "background": "red",
           "foreground": "black",
-          "template": " {{ .UpstreamIcon }}{{ url (base .UpstreamURL) .UpstreamURL }} {{ .HEAD }}",
+          "template": " {{ .UpstreamIcon }}{{ url (base .UpstreamURL) .UpstreamURL }} {{ .HEAD }} ",
           "properties": {
             "fetch_status": false,
             "fetch_stash_count": false,
@@ -277,11 +277,12 @@
     },
     {
       "type": "git",
+      "style": "plain",
       "tips": [
         "git"
       ],
       "foreground": "darkGray",
-      "template": "≡",
+      "template": "≡ ",
       "templates_logic": "join",
       "templates": [
         "{{ if .Working.Changed }} {{ .Working.String }}{{ end }}",
