@@ -99,65 +99,6 @@
           "foreground": "white",
           "background": "darkGray",
           "template": "{{ if .SSHSession }} 󰢩 {{ end }}  {{ .HostName }}  {{ .UserName }}{{ if .Root }}  {{ end }} "
-        },
-        {
-          "type": "git",
-          "alias": "Git",
-          "style": "diamond",
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "background": "red",
-          "foreground": "black",
-          "template": " {{ .UpstreamIcon }}{{ url (base .UpstreamURL) .UpstreamURL }} {{ .HEAD }} ",
-          "properties": {
-            "fetch_status": false,
-            "fetch_stash_count": false,
-            "fetch_worktree_count": false,
-            "fetch_upstream_icon": true,
-            "fetch_bare_info": false,
-            "fetch_user": false,
-            "branch_max_length": 0,
-            "branch_icon": " ",
-            "branch_identical_icon": "≡ ",
-            "branch_ahead_icon": "↑ ",
-            "branch_behind_icon": "↓ ",
-            "branch_gone_icon": "≢ ",
-            "commit_icon": " ",
-            "tag_icon": " ",
-            "rebase_icon": " ",
-            "cherry_pick_icon": " ",
-            "revert_icon": " ",
-            "merge_icon": " ",
-            "no_commits_icon": " ",
-            "github_icon": " ",
-            "gitlab_icon": " ",
-            "bitbucket_icon": " ",
-            "azure_devops_icon": " ",
-            "codecommit_icon": " ",
-            "git_icon": " "
-          }
-        },
-        {
-          "type": "path",
-          "alias": "Path",
-          "style": "diamond",
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "background": "blue",
-          "foreground": "black",
-          "template": " {{ path .Path .Location }} ",
-          "properties": {
-            "style": "unique",
-            "folder_separator_icon": "/",
-            "home_icon": "~",
-            "folder_icon": " ",
-            "windows_registry_icon": " ",
-            "max_width": 50,
-            "mapped_locations_enabled": true,
-            "hide_root_location": false,
-            "cycle_folder_separator": false,
-            "gitdir_format": "<i>%s</i>"
-          }
         }
       ]
     },
@@ -197,6 +138,89 @@
           "template": "  {{ .CurrentDate | date .Format }} ",
           "properties": {
             "time_format": "15:04:05"
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "newline": true,
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "text",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "black",
+          "background": "lightYellow",
+          "template": "  "
+        },
+        {
+          "type": "path",
+          "alias": "Path",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "background": "blue",
+          "foreground": "black",
+          "template": " {{ path .Path .Location }} ",
+          "properties": {
+            "style": "powerlevel",
+            "folder_separator_icon": "/",
+            "home_icon": "~",
+            "folder_icon": " ",
+            "windows_registry_icon": " ",
+            "max_width": 80,
+            "mapped_locations_enabled": true,
+            "hide_root_location": false,
+            "cycle_folder_separator": false,
+            "gitdir_format": "<i>%s</i>"
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "newline": false,
+      "alignment": "right",
+      "filler": "",
+      "segments": [
+        {
+          "type": "git",
+          "alias": "Git",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "background": "red",
+          "foreground": "black",
+          "template": " {{ .UpstreamIcon }}{{ url (base .UpstreamURL) .UpstreamURL }} {{ .HEAD }} ",
+          "properties": {
+            "fetch_status": false,
+            "fetch_stash_count": false,
+            "fetch_worktree_count": false,
+            "fetch_upstream_icon": true,
+            "fetch_bare_info": false,
+            "fetch_user": false,
+            "branch_max_length": 0,
+            "branch_icon": " ",
+            "branch_identical_icon": "≡ ",
+            "branch_ahead_icon": "↑ ",
+            "branch_behind_icon": "↓ ",
+            "branch_gone_icon": "≢ ",
+            "commit_icon": " ",
+            "tag_icon": " ",
+            "rebase_icon": " ",
+            "cherry_pick_icon": " ",
+            "revert_icon": " ",
+            "merge_icon": " ",
+            "no_commits_icon": " ",
+            "github_icon": " ",
+            "gitlab_icon": " ",
+            "bitbucket_icon": " ",
+            "azure_devops_icon": " ",
+            "codecommit_icon": " ",
+            "git_icon": " "
           }
         }
       ]
