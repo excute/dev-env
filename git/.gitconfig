@@ -3,3 +3,8 @@
 	name = Excute
 [log]
 	date = iso-strict
+[alias]
+    rl = reflog --pretty=reflog
+[pretty]
+	reflog = %C(auto)%h %<|(18)%gd %C(blue)%ci %C(green)%an%C(reset) %s
+    # [%gs]
