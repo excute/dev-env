@@ -1,10 +1,17 @@
 [user]
 	email = oys1751@gmail.com
 	name = Excute
+
 [log]
 	date = iso-strict
+
+[pull]
+	rebase = false
+
+# reflog
 [alias]
-    rl = reflog --pretty=reflog
+	rl = reflog --pretty=reflog
 [pretty]
 	reflog = %C(auto)%h %<|(18)%gd %C(blue)%ci %C(green)%an%C(reset) %s
-    # [%gs]
+	# [%gs]
+
