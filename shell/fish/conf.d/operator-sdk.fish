@@ -1,1 +1,1 @@
-operator-sdk completion fish | source
+# operator-sdk completion fish | source
