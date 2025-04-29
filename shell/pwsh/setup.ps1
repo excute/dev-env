@@ -23,7 +23,7 @@ New-Item -Path "$env:USERPROFILE/.gitconfig" -ItemType HardLink -Value "../../gi
 
 # go
 ## golang-ci
-if (Test-Path "$env:USERPROFILE/.golang-ci.yaml") {
-	Remove-Item "$env:USERPROFILE/.golang-ci.yaml"
+if (Test-Path "$env:USERPROFILE/.golangci.yaml") {
+	Remove-Item "$env:USERPROFILE/.golangci.yaml"
 }
-New-Item -Path "$env:USERPROFILE/.golang-ci.yaml" -ItemType HardLink -Value "../../go/.golang-ci.yaml"
+New-Item -Path "$env:USERPROFILE/.golangci.yaml" -ItemType HardLink -Value "../../go/.golangci.yaml"
