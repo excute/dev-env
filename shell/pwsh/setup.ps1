@@ -9,12 +9,21 @@ Copy-Item "./Microsoft.PowerShell_profile.ps1" -Destination "$env:OneDrive/Docum
 if (Test-Path "$env:OneDrive/Documents/PowerShell/oh-my-posh.json") {
 	Remove-Item "$env:OneDrive/Documents/PowerShell/oh-my-posh.json"
 }
-Copy-Item "../oh-my-posh/oh-my-posh.json" -Destination "$env:OneDrive/Documents/PowerShell/oh-my-posh.json"
+New-Item -Path "$env:OneDrive/Documents/PowerShell/oh-my-posh.json" -ItemType HardLink -Value "../oh-my-posh/oh-my-posh.json"
+# Copy-Item "../oh-my-posh/oh-my-posh.json" -Destination "$env:OneDrive/Documents/PowerShell/oh-my-posh.json"
 
 
 # git
 if (Test-Path "$env:USERPROFILE/.gitconfig") {
 	Remove-Item "$env:USERPROFILE/.gitconfig"
 }
-# New-Item -Path "$env:USERPROFILE/.gitconfig" -ItemType HardLink -Value "../../git/.gitconfig"
-Copy-Item "../../git/.gitconfig" -Destination "$env:USERPROFILE/.gitconfig"
+New-Item -Path "$env:USERPROFILE/.gitconfig" -ItemType HardLink -Value "../../git/.gitconfig"
+# Copy-Item "../../git/.gitconfig" -Destination "$env:USERPROFILE/.gitconfig"
+
+
+# go
+## golang-ci
+if (Test-Path "$env:USERPROFILE/.golang-ci.yaml") {
+	Remove-Item "$env:USERPROFILE/.golang-ci.yaml"
+}
+New-Item -Path "$env:USERPROFILE/.golang-ci.yaml" -ItemType HardLink -Value "../../go/.golang-ci.yaml"

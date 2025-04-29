@@ -1,33 +1,15 @@
+# Defines the configuration version.
+# The only possible value is "2".
+version: "2"
+
 linters:
-  # disable-all: false
-  # enable-all: false
-
-  # fast: true
-
-  presets:
-    - bugs
-    - comment
-    # - complexity
-    - error
-    - format
-    # - import
-    # - metalinter
-    # - module
-    - performance
-    # - sql
-    - style
-    # - test
-    - unused
-
+  # Default set of linters.
+  # The value can be: `standard`, `all`, `none`, or `fast`.
+  # Default: standard
+  default: standard
+  # Enable specific linter.
+  # https://golangci-lint.run/usage/linters/#enabled-by-default
   enable:
-    # default
-    - errcheck
-    - gosimple
-    - govet
-    - staticcheck
-    - unused
-
-    # additional
     # - asasalint
     # - asciicheck
     # - bidichk
@@ -44,19 +26,17 @@ linters:
     # - dupword
     # - durationcheck
     # - err113
+    - errcheck
     # - errchkjson
     # - errname
     # - errorlint
-    # - execinquery
     # - exhaustive
     # - exhaustruct
-    # - exportloopref
     # - exptostd
     # - fatcontext
     # - forbidigo
     # - forcetypeassert
     # - funlen
-    # - gci
     # - ginkgolinter
     # - gocheckcompilerdirectives
     # - gochecknoglobals
@@ -68,19 +48,124 @@ linters:
     # - gocyclo
     # - godot
     # - godox
-    # - gofmt
-    # - gofumpt
     # - goheader
-    # - goimports
     # - gomoddirectives
     # - gomodguard
     # - goprintffuncname
     # - gosec
     # - gosmopolitan
+    # - govet
     # - grouper
     # - iface
     # - importas
     # - inamedparam
+    # - ineffassign
+    # - interfacebloat
+    # - intrange
+    # - ireturn
+    # - lll
+    # - loggercheck
+    # - maintidx
+    # - makezero
+    # - mirror
+    # - misspell
+    # - mnd
+    # - musttag
+    # - nakedret
+    # - nestif
+    # - nilerr
+    # - nilnesserr
+    # - nilnil
+    # - nlreturn
+    # - noctx
+    # - nolintlint
+    # - nonamedreturns
+    # - nosprintfhostport
+    # - paralleltest
+    # - perfsprint
+    # - prealloc
+    # - predeclared
+    # - promlinter
+    # - protogetter
+    # - reassign
+    # - recvcheck
+    - revive
+    # - rowserrcheck
+    # - sloglint
+    # - spancheck
+    # - sqlclosecheck
+    # - staticcheck
+    # - tagalign
+    # - tagliatelle
+    # - testableexamples
+    # - testifylint
+    # - testpackage
+    # - thelper
+    # - tparallel
+    # - unconvert
+    # - unparam
+    # - unused
+    # - usestdlibvars
+    # - usetesting
+    # - varnamelen
+    # - wastedassign
+    # - whitespace
+    # - wrapcheck
+    # - wsl
+    # - zerologlint
+  # Disable specific linter
+  # https://golangci-lint.run/usage/linters/#disabled-by-default
+  disable:
+    # - asasalint
+    # - asciicheck
+    # - bidichk
+    # - bodyclose
+    # - canonicalheader
+    # - containedctx
+    # - contextcheck
+    # - copyloopvar
+    # - cyclop
+    # - decorder
+    # - depguard
+    # - dogsled
+    # - dupl
+    # - dupword
+    # - durationcheck
+    # - err113
+    # - errcheck
+    # - errchkjson
+    # - errname
+    # - errorlint
+    # - exhaustive
+    # - exhaustruct
+    # - exptostd
+    # - fatcontext
+    # - forbidigo
+    # - forcetypeassert
+    # - funlen
+    # - ginkgolinter
+    # - gocheckcompilerdirectives
+    # - gochecknoglobals
+    # - gochecknoinits
+    # - gochecksumtype
+    # - gocognit
+    # - goconst
+    # - gocritic
+    # - gocyclo
+    # - godot
+    - godox
+    # - goheader
+    # - gomoddirectives
+    # - gomodguard
+    # - goprintffuncname
+    # - gosec
+    # - gosmopolitan
+    # - govet
+    # - grouper
+    # - iface
+    # - importas
+    # - inamedparam
+    # - ineffassign
     # - interfacebloat
     # - intrange
     # - ireturn
@@ -115,10 +200,9 @@ linters:
     # - sloglint
     # - spancheck
     # - sqlclosecheck
-    # - stylecheck
+    # - staticcheck
     # - tagalign
     # - tagliatelle
-    # - tenv
     # - testableexamples
     # - testifylint
     # - testpackage
@@ -126,114 +210,7 @@ linters:
     # - tparallel
     # - unconvert
     # - unparam
-    # - usestdlibvars
-    # - usetesting
-    # - varnamelen
-    # - wastedassign
-    # - whitespace
-    # - wrapcheck
-    # - wsl
-    # - zerologlint
-
-  disable:
-    # - asasalint
-    # - asciicheck
-    # - bidichk
-    # - bodyclose
-    # - canonicalheader
-    # - containedctx
-    # - contextcheck
-    # - copyloopvar
-    # - cyclop
-    # - decorder
-    - depguard
-    # - dogsled
-    # - dupl
-    # - dupword
-    # - durationcheck
-    # - err113
-    # - errchkjson
-    # - errname
-    # - errorlint
-    # - execinquery
-    # - exhaustive
-    # - exhaustruct
-    # - exportloopref
-    # - exptostd
-    # - fatcontext
-    # - forbidigo
-    # - forcetypeassert
-    # - funlen
-    # - gci
-    # - ginkgolinter
-    # - gocheckcompilerdirectives
-    # - gochecknoglobals
-    # - gochecknoinits
-    # - gochecksumtype
-    # - gocognit
-    # - goconst
-    # - gocritic
-    # - gocyclo
-    - godot
-    # - godox
-    # - gofmt
-    # - gofumpt
-    # - goheader
-    # - goimports
-    # - gomoddirectives
-    # - gomodguard
-    # - goprintffuncname
-    # - gosec
-    # - gosmopolitan
-    # - grouper
-    # - iface
-    # - importas
-    # - inamedparam
-    # - interfacebloat
-    # - intrange
-    # - ireturn
-    - lll
-    # - loggercheck
-    # - maintidx
-    # - makezero
-    # - mirror
-    # - misspell
-    # - mnd
-    # - musttag
-    # - nakedret
-    # - nestif
-    # - nilerr
-    # - nilnesserr
-    # - nilnil
-    # - nlreturn
-    # - noctx
-    # - nolintlint
-    # - nonamedreturns
-    # - nosprintfhostport
-    # - paralleltest
-    # - perfsprint
-    # - prealloc
-    # - predeclared
-    # - promlinter
-    # - protogetter
-    # - reassign
-    # - recvcheck
-    # - revive
-    # - rowserrcheck
-    # - sloglint
-    # - spancheck
-    # - sqlclosecheck
-    # - stylecheck
-    # - tagalign
-    # - tagliatelle
-    # - tenv
-    # - testableexamples
-    # - testifylint
-    # - testpackage
-    # - thelper
-    # - tparallel
-    # - unconvert
-    # - unparam
+    # - unused
     # - usestdlibvars
     # - usetesting
     # - varnamelen
