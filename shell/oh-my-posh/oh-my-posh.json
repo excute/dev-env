@@ -240,7 +240,7 @@
         {
           "type": "text",
           "style": "plain",
-          "template": "{{ if eq .Segments.Status.Code 0 }}<green>{{ else }}<red>{{ end }}❯</>",
+          "template": "{{ if eq .Code 0 }}<green>{{ else }}<red>{{ end }}❯</>",
           "interactive": false
         }
       ]
