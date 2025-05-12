@@ -6,7 +6,9 @@
   "version": 3,
   "transient_prompt": {
     "foreground": "darkGray",
-    "template": "\n {{ .Segments.Status.String }}  {{ .Segments.ExecutionTime.FormattedMs }}\n\n<black,lightYellow>  {{ now | date \"15:04:05\" }} </><lightYellow></> "
+    "template": "\n {{ .Segments.Status.String }}  {{ .Segments.ExecutionTime.FormattedMs }}\n\n<black,lightYellow>  {{ now | date \"15:04:05\" }} </><lightYellow> ",
+    "filler": "",
+    "newline": false
   },
   "blocks": [
     {
@@ -22,7 +24,7 @@
           "template": " {{ .String }}",
           "properties": {
             "always_enabled": true,
-            "status_template": "{{ if .Error }}<red> {{ hresult .Code }}{{ else }}<green> {{ end }}</>",
+            "status_template": "{{ if eq .Code 0 }}<green> {{ else }}<red> {{ .Code | hresult }}{{ end }}</>",
             "status_separator": " | "
           }
         },
@@ -31,11 +33,19 @@
           "alias": "ExecutionTime",
           "style": "plain",
           "foreground": "darkGray",
-          "template": "  {{ .FormattedMs }}\n\n",
+          "template": "  {{ .FormattedMs }} ",
           "properties": {
             "always_enabled": true,
             "threshold": 500,
             "style": "austin"
+          }
+        },
+        {
+          "type": "text",
+          "style": "plain",
+          "template": "\n",
+          "properties": {
+            "always_enabled": true
           }
         }
       ]
@@ -46,8 +56,135 @@
       "alignment": "left",
       "segments": [
         {
+          "type": "git",
+          "alias": "Git",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "black",
+          "background": "green",
+          "template": " {{ .UpstreamIcon }}{{ url (base .UpstreamURL) .UpstreamURL }} {{ .HEAD }} ",
+          "properties": {
+            "fetch_status": false,
+            "fetch_stash_count": false,
+            "fetch_worktree_count": false,
+            "fetch_upstream_icon": true,
+            "fetch_bare_info": false,
+            "fetch_user": false,
+            "branch_max_length": 0,
+            "branch_icon": " ",
+            "branch_identical_icon": "≡ ",
+            "branch_ahead_icon": "↑ ",
+            "branch_behind_icon": "↓ ",
+            "branch_gone_icon": "≢ ",
+            "commit_icon": " ",
+            "tag_icon": " ",
+            "rebase_icon": " ",
+            "cherry_pick_icon": " ",
+            "revert_icon": " ",
+            "merge_icon": " ",
+            "no_commits_icon": " ",
+            "github_icon": " ",
+            "gitlab_icon": " ",
+            "bitbucket_icon": " ",
+            "azure_devops_icon": " ",
+            "codecommit_icon": " ",
+            "git_icon": " "
+          }
+        },
+        {
+          "type": "text",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "black",
+          "background": "lightYellow",
+          "template": "{{ if .Segments.Contains \"Git\" }}{{ else }}  {{ end }}"
+        },
+        {
+          "type": "path",
+          "alias": "Path",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "white",
+          "background": "darkGray",
+          "template": " {{ path .Path .Location }} ",
+          "properties": {
+            "folder_separator_icon": "/",
+            "folder_separator_template": "",
+            "home_icon": "~",
+            "folder_icon": " ",
+            "windows_registry_icon": " ",
+            "style": "powerlevel",
+            "mixed_threshold": 4,
+            "max_depth": 1,
+            "max_width": 80,
+            "hide_root_location": false,
+            "cycle": [],
+            "cycle_folder_separator": false,
+            "folder_format": "%s",
+            "edge_format": "%s",
+            "left_format": "%s",
+            "right_format": "%s",
+            "gitdir_format": "<red>%s</>",
+            "display_cygpath": false,
+            "display_root": false,
+            "mapped_locations_enabled": true,
+            "mapped_locations": {
+              "{{ .Segments.Git.Dir }}": ""
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "newline": false,
+      "alignment": "right",
+      "overflow": "hide",
+      "segments": [
+        {
+          "type": "session",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "black",
+          "background": "lightYellow",
+          "template": "  {{ .UserName }}{{ if .Root }}  {{ end }}{{ if .SSHSession }} 󰢩 {{ end }}  {{ .HostName }} "
+        },
+        {
+          "type": "sysinfo",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "white",
+          "background": "darkGray",
+          "template": "   {{ round .PhysicalPercentUsed .Precision }}% ",
+          "properties": {
+            "precision": 2
+          }
+        },
+        {
+          "type": "battery",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "black",
+          "background": "lightRed"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "newline": true,
+      "alignment": "left",
+      "segments": [
+        {
           "type": "os",
-          "style": "plain",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
           "foreground": "black",
           "background": "lightYellow",
           "template": " {{ .Icon }}",
@@ -99,149 +236,16 @@
           }
         },
         {
-          "type": "session",
+          "type": "upgrade",
           "style": "diamond",
           "leading_diamond": "",
           "trailing_diamond": "",
-          "foreground": "white",
-          "background": "darkGray",
-          "template": "{{ if .SSHSession }} 󰢩 {{ end }}  {{ .HostName }}  {{ .UserName }}{{ if .Root }}  {{ end }} "
-        }
-      ]
-    },
-    {
-      "type": "prompt",
-      "newline": false,
-      "alignment": "right",
-      "filler": "<darkGray,transparent>─</>",
-      "segments": [
-        {
-          "type": "sysinfo",
-          "style": "diamond",
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "background": "darkGray",
-          "foreground": "white",
-          "template": "   {{ round .PhysicalPercentUsed .Precision }}% ",
-          "properties": {
-            "precision": 2
-          }
-        },
-        {
-          "type": "battery",
-          "style": "diamond",
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "background": "lightRed",
-          "foreground": "black"
-        },
-        {
-          "type": "time",
-          "style": "diamond",
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "background": "lightYellow",
           "foreground": "black",
-          "template": "  {{ .CurrentDate | date .Format }} ",
-          "properties": {
-            "time_format": "15:04:05"
-          }
-        }
-      ]
-    },
-    {
-      "type": "prompt",
-      "newline": true,
-      "alignment": "left",
-      "segments": [
-        {
-          "type": "text",
-          "style": "diamond",
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "foreground": "black",
-          "background": "lightYellow",
-          "template": " {{ path \" \" .Segments.Path.Location }}"
-        },
-        {
-          "type": "path",
-          "alias": "Path",
-          "style": "diamond",
-          "leading_diamond": "",
-          "trailing_diamond": "",
           "background": "blue",
-          "foreground": "black",
-          "template": "{{ .Path }} ",
+          "template": "  ",
           "properties": {
-            "style": "powerlevel",
-            "folder_separator_icon": "/",
-            "home_icon": "~",
-            "folder_icon": " ",
-            "windows_registry_icon": " ",
-            "max_width": 80,
-            "mapped_locations_enabled": true,
-            "hide_root_location": false,
-            "cycle_folder_separator": false,
-            "gitdir_format": "<i>%s</i>"
+            "cache_duration": "48h"
           }
-        }
-      ]
-    },
-    {
-      "type": "prompt",
-      "newline": false,
-      "alignment": "right",
-      "filler": "",
-      "segments": [
-        {
-          "type": "git",
-          "alias": "Git",
-          "style": "diamond",
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "background": "green",
-          "foreground": "black",
-          "template": " {{ .UpstreamIcon }}{{ url (base .UpstreamURL) .UpstreamURL }} {{ .HEAD }} ",
-          "properties": {
-            "fetch_status": false,
-            "fetch_stash_count": false,
-            "fetch_worktree_count": false,
-            "fetch_upstream_icon": true,
-            "fetch_bare_info": false,
-            "fetch_user": false,
-            "branch_max_length": 0,
-            "branch_icon": " ",
-            "branch_identical_icon": "≡ ",
-            "branch_ahead_icon": "↑ ",
-            "branch_behind_icon": "↓ ",
-            "branch_gone_icon": "≢ ",
-            "commit_icon": " ",
-            "tag_icon": " ",
-            "rebase_icon": " ",
-            "cherry_pick_icon": " ",
-            "revert_icon": " ",
-            "merge_icon": " ",
-            "no_commits_icon": " ",
-            "github_icon": " ",
-            "gitlab_icon": " ",
-            "bitbucket_icon": " ",
-            "azure_devops_icon": " ",
-            "codecommit_icon": " ",
-            "git_icon": " "
-          }
-        }
-      ]
-    },
-    {
-      "type": "prompt",
-      "newline": true,
-      "alignment": "left",
-      "segments": [
-        {
-          "type": "text",
-          "style": "plain",
-          "template": "{{ if eq .Code 0 }}<green>{{ else }}<red>{{ end }}❯</>",
-          "interactive": false
         }
       ]
     }
@@ -319,8 +323,8 @@
         "{{ if .Working.Changed }} {{ .Working.String }}{{ end }}",
         "{{ if gt .StashCount 0 }} {{ .StashCount }}{{ end }}",
         "{{ if .Staging.Changed }} {{ .Staging.String }}{{ end }}",
-        "{{ if gt .Behind 0 }}\uf048 {{ .Behind }}{{ end }}",
-        "{{ if gt .Ahead 0 }}\uf051 {{ .Ahead }}{{ end }}"
+        "{{ if gt .Behind 0 }} {{ .Behind }}{{ end }}",
+        "{{ if gt .Ahead 0 }} {{ .Ahead }}{{ end }}"
       ],
       "properties": {
         "fetch_status": true,
