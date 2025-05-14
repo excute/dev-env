@@ -5,8 +5,7 @@
   "patch_pwsh_bleed": true,
   "version": 3,
   "transient_prompt": {
-    "foreground": "darkGray",
-    "template": "\n {{ .Segments.Status.String }}  {{ .Segments.ExecutionTime.FormattedMs }}\n\n<black,lightYellow>  {{ now | date \"15:04:05\" }} </><lightYellow> ",
+    "template": "\n <darkGray>{{ .Segments.Status.String }}  {{ .Segments.ExecutionTime.FormattedMs }}</>\n\n<white,lightYellow>\n\n  {{ now | date \"15:04:05\" }} </><lightYellow></><blue></> ",
     "filler": "",
     "newline": false
   },
@@ -33,19 +32,78 @@
           "alias": "ExecutionTime",
           "style": "plain",
           "foreground": "darkGray",
-          "template": "  {{ .FormattedMs }} ",
+          "template": "  {{ .FormattedMs }}\n",
           "properties": {
             "always_enabled": true,
             "threshold": 500,
             "style": "austin"
           }
-        },
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "newline": true,
+      "alignment": "left",
+      "segments": [
         {
           "type": "text",
-          "style": "plain",
-          "template": "\n",
+          "style": "diamond",
+          "foreground": "black",
+          "background": "yellow",
+          "template": "\n "
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "newline": true,
+      "alignment": "left",
+      "overflow": "hide",
+      "segments": [
+        {
+          "type": "session",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "black",
+          "background": "yellow",
+          "template": "  {{ .UserName }}{{ if .Root }}  {{ end }} "
+        },
+        {
+          "type": "session",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "black",
+          "background": "yellow",
+          "template": "{{ if .SSHSession }}󰢩 {{ end }} {{ .HostName }} "
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "filler": "",
+      "segments": [
+        {
+          "type": "battery",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "black",
+          "background": "red"
+        },
+        {
+          "type": "sysinfo",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "black",
+          "background": "yellow",
+          "template": "   {{ round .PhysicalPercentUsed .Precision }}% ",
           "properties": {
-            "always_enabled": true
+            "precision": 2
           }
         }
       ]
@@ -62,7 +120,7 @@
           "leading_diamond": "",
           "trailing_diamond": "",
           "foreground": "black",
-          "background": "green",
+          "background": "magenta",
           "template": " {{ .UpstreamIcon }}{{ url (base .UpstreamURL) .UpstreamURL }} {{ .HEAD }} ",
           "properties": {
             "fetch_status": false,
@@ -98,8 +156,8 @@
           "leading_diamond": "",
           "trailing_diamond": "",
           "foreground": "black",
-          "background": "lightYellow",
-          "template": "{{ if .Segments.Contains \"Git\" }}{{ else }}  {{ end }}"
+          "background": "yellow",
+          "template": " {{ path \" \" .AbsolutePWD }} "
         },
         {
           "type": "path",
@@ -107,16 +165,16 @@
           "style": "diamond",
           "leading_diamond": "",
           "trailing_diamond": "",
-          "foreground": "white",
+          "foreground": "lightWhite",
           "background": "darkGray",
-          "template": " {{ path .Path .Location }} ",
+          "template": " {{ if .Segments.Contains \"Git\" }}{{ .Path | replace .Segments.Git.Dir \"\" }}{{ else }}{{ .Path }}{{ end }} ",
           "properties": {
             "folder_separator_icon": "/",
             "folder_separator_template": "",
             "home_icon": "~",
             "folder_icon": " ",
             "windows_registry_icon": " ",
-            "style": "powerlevel",
+            "style": "full",
             "mixed_threshold": 4,
             "max_depth": 1,
             "max_width": 80,
@@ -127,7 +185,7 @@
             "edge_format": "%s",
             "left_format": "%s",
             "right_format": "%s",
-            "gitdir_format": "<red>%s</>",
+            "gitdir_format": "%s",
             "display_cygpath": false,
             "display_root": false,
             "mapped_locations_enabled": true,
@@ -135,43 +193,6 @@
               "{{ .Segments.Git.Dir }}": ""
             }
           }
-        }
-      ]
-    },
-    {
-      "type": "prompt",
-      "newline": false,
-      "alignment": "right",
-      "overflow": "hide",
-      "segments": [
-        {
-          "type": "session",
-          "style": "diamond",
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "foreground": "black",
-          "background": "lightYellow",
-          "template": "  {{ .UserName }}{{ if .Root }}  {{ end }}{{ if .SSHSession }} 󰢩 {{ end }}  {{ .HostName }} "
-        },
-        {
-          "type": "sysinfo",
-          "style": "diamond",
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "foreground": "white",
-          "background": "darkGray",
-          "template": "   {{ round .PhysicalPercentUsed .Precision }}% ",
-          "properties": {
-            "precision": 2
-          }
-        },
-        {
-          "type": "battery",
-          "style": "diamond",
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "foreground": "black",
-          "background": "lightRed"
         }
       ]
     },
@@ -186,7 +207,7 @@
           "leading_diamond": "",
           "trailing_diamond": "",
           "foreground": "black",
-          "background": "lightYellow",
+          "background": "yellow",
           "template": " {{ .Icon }}",
           "properties": {
             "display_distro_name": false,
@@ -224,7 +245,7 @@
           "leading_diamond": "",
           "trailing_diamond": "",
           "foreground": "black",
-          "background": "lightYellow",
+          "background": "yellow",
           "template": "{{ .Name }}",
           "properties": {
             "mapped_shell_names": {
