@@ -1,11 +1,19 @@
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 3,
   "final_space": true,
   "shell_integration": true,
   "patch_pwsh_bleed": true,
-  "version": 3,
+  "var": {
+    "RandomEmojis": [
+      "🤔",
+      "🧐",
+      "🐶",
+      "😎"
+    ]
+  },
   "transient_prompt": {
-    "template": "\n <darkGray>{{ .Segments.Status.String }}  {{ .Segments.ExecutionTime.FormattedMs }}</>\n\n<white,lightYellow>\n\n  {{ now | date \"15:04:05\" }} </><lightYellow></><blue></> ",
+    "template": "\n <darkGray>{{ .Segments.Status.String }}  {{ .Segments.ExecutionTime.FormattedMs }}</>\n\n\n<white,lightYellow>  {{ now | date \"15:04:05\" }} </><lightYellow></>\n<blue>></> ",
     "filler": "",
     "newline": false
   },
@@ -43,15 +51,28 @@
     },
     {
       "type": "prompt",
-      "newline": true,
+      "newline": false,
       "alignment": "left",
       "segments": [
         {
           "type": "text",
-          "style": "diamond",
-          "foreground": "black",
-          "background": "yellow",
+          "style": "plain",
           "template": "\n "
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "newline": true,
+      "alignment": "right",
+      "filler": "<,yellow> </>",
+      "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "transparent",
+          "background": "yellow",
+          "template": "{{ random .Var.RandomEmojis }} "
         }
       ]
     },
@@ -103,7 +124,7 @@
           "background": "yellow",
           "template": "   {{ round .PhysicalPercentUsed .Precision }}% ",
           "properties": {
-            "precision": 2
+            "precision": 0
           }
         }
       ]
@@ -167,7 +188,11 @@
           "trailing_diamond": "",
           "foreground": "lightWhite",
           "background": "darkGray",
-          "template": " {{ if .Segments.Contains \"Git\" }}{{ .Path | replace .Segments.Git.Dir \"\" }}{{ else }}{{ .Path }}{{ end }} ",
+          "templates_logic": "first_match",
+          "templates": [
+            " {{ if .Segments.Contains \"Git\" }}{{ $gitDir := replace \"\\\\\" \"/\" .Segments.Git.Dir }}{{ replace $gitDir \"...\" .Path}}{{ end }} ",
+            " {{ .Path }} "
+          ],
           "properties": {
             "folder_separator_icon": "/",
             "folder_separator_template": "",
