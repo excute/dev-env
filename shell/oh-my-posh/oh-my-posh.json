@@ -98,7 +98,7 @@
           "trailing_diamond": "",
           "foreground": "black",
           "background": "yellow",
-          "template": "{{ if .SSHSession }}󰢩 {{ end }} {{ .HostName }} "
+          "template": "{{ if .SSHSession }}󰢩 {{ end }} {{ .HostName }} {{ if .WSL}} {{ end }} "
         }
       ]
     },
