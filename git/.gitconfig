@@ -15,3 +15,5 @@
 	reflog = %C(auto)%h %<|(18)%gd %C(blue)%ci %C(green)%an%C(reset) %s
 	# [%gs]
 
+[includeIf "gitdir:~/cdm/**"]
+	path = ~/cdm/.gitconfig
