@@ -108,12 +108,16 @@
       "filler": "",
       "segments": [
         {
-          "type": "battery",
+          "type": "upgrade",
           "style": "diamond",
           "leading_diamond": "",
           "trailing_diamond": "",
           "foreground": "black",
-          "background": "red"
+          "background": "blue",
+          "template": "  ",
+          "properties": {
+            "cache_duration": "48h"
+          }
         },
         {
           "type": "sysinfo",
@@ -126,6 +130,14 @@
           "properties": {
             "precision": 0
           }
+        },
+        {
+          "type": "battery",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": "",
+          "foreground": "black",
+          "background": "red"
         }
       ]
     },
@@ -279,18 +291,6 @@
               "zsh": "󰬡 ",
               "fish": " "
             }
-          }
-        },
-        {
-          "type": "upgrade",
-          "style": "diamond",
-          "leading_diamond": "",
-          "trailing_diamond": "",
-          "foreground": "black",
-          "background": "blue",
-          "template": "  ",
-          "properties": {
-            "cache_duration": "48h"
           }
         }
       ]
