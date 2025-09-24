@@ -1,6 +1,6 @@
 # Prompt
 ## oh-my-posh
-oh-my-posh init pwsh --config "$env:OneDrive/Documents/PowerShell/oh-my-posh.json" | Invoke-Expression
+oh-my-posh init pwsh --config "$env:OneDriveConsumer/Documents/PowerShell/oh-my-posh.json" | Invoke-Expression
 
 ## posh-git
 Import-Module posh-git
