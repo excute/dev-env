@@ -83,12 +83,12 @@ fi
 eval "$(direnv hook zsh)"
 
 ## Go
-export PATH=/home/oys/go/bin:$PATH
+export PATH=$PATH:$HOME/go/bin:
 export GOROOT_LOCAL=/usr/local/go
-export GOROOT_1_19_13=/home/oys/sdk/go1.19.13
-export GOROOT_1_22_2=/home/oys/sdk/go1.22.2
-export GOROOT_1_22_3=/home/oys/sdk/go1.22.3
-export GOROOT_1_22_4=/home/oys/sdk/go1.22.4
+export GOROOT_1_19_13=$HOME/sdk/go1.19.13
+export GOROOT_1_22_2=$HOME/sdk/go1.22.2
+export GOROOT_1_22_3=$HOME/sdk/go1.22.3
+export GOROOT_1_22_4=$HOME/sdk/go1.22.4
 
 ## NodeJS
 ### NVM
