@@ -15,5 +15,8 @@
 	reflog = %C(auto)%h %<|(18)%gd %C(blue)%ci %C(green)%an%C(reset) %s
 	# [%gs]
 
-[includeIf "gitdir:~/cdm/**"]
-	path = ~/cdm/.gitconfig
+#[includeIf "gitdir:~/cdm/**"]
+#	path = ~/cdm/.gitconfig
+[includeIf "gitdir:~/gitlab.datacommand.kr/**"]
+	path = ~/gitlab.datacommand.kr/.gitconfig
+
