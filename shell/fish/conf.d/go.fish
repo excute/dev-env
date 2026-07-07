@@ -14,4 +14,7 @@ export GO_1_24_2_BIN=$HOME/sdk/go1.24.2/bin
 
 export GO_1_25_6_BIN=$HOME/sdk/go1.25.6/bin
 
+export GO_1_26_3_BIN=$HOME/sdk/go1.26.3/bin
+export GO_1_26_4_BIN=$HOME/sdk/go1.26.4/bin
+
 fish_add_path $HOME/go/bin
